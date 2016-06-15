@@ -3,10 +3,11 @@ const auth = {
     return !!localStorage.token
   },
   setProfile(profile){
-    this.profile = profile
+    localStorage.profile = JSON.stringify(profile)
   },
   getProfile(){
-    return this.profile
+    const profile = localStorage.profile
+    return profile ? JSON.parse(localStorage.profile) : {}
   },
   setToken(token){
     localStorage.token = token
@@ -16,6 +17,7 @@ const auth = {
   },
   logout(){
     delete localStorage.token
+    delete localStorage.profile
   }
 }
 

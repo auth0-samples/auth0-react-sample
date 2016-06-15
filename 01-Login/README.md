@@ -1,8 +1,7 @@
 # Starter Seed for Auth0-React Quickstart Guides
 
-This seed project contains a regular ReactJS application.
-
-The seed does not a contain anything related to Auth0 except for the `package.json` includes. Instead it it will server as a starting point for adding Auth0 to your project.
+This project contains a regular ReactJS application where react-router is used to require authentication for urls with restricted access.
+The library `auth0-lock` provides the user authentication, and we also have a `auth.js` helper to manage the localStorage items.
 
 ## Getting Started
 
@@ -26,5 +25,6 @@ npm start
 * [hjs-webpack](https://github.com/HenrikJoreteg/hjs-webpack)
 * [react.js](http://facebook.github.io/react/)
 * [react-router](https://github.com/reactjs/react-router)
+* [react-bootstrap](https://react-bootstrap.github.io/)
 * [enzyme](https://github.com/airbnb/enzyme)
 * [chai](http://chaijs.com)

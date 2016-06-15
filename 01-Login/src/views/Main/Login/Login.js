@@ -6,9 +6,33 @@ import Auth0Lock from 'auth0-lock'
 import auth from 'utils/auth'
 
 export class Login extends React.Component {
+  static contextTypes = {
+    router: T.object
+  }
+
+  static propTypes = {
+    location: T.object
+  }
+
   constructor(props, context) {
     super(props, context)
     this.lock = new Auth0Lock(__AUTH0_CLIENT_ID__, __AUTH0_DOMAIN__)
+    this.parseAuthHash()
+  }
+
+  parseAuthHash() {
+    var authHash = this.lock.parseHash(this.props.location.pathname)
+    if (authHash && authHash.id_token) {
+      auth.setToken(authHash.id_token)
+      this.lock.getProfile(authHash.id_token, (err, profile) => {
+        if (err) {
+          console.log("Error loading the Profile", err)
+        } else {
+          auth.setProfile(profile)
+        }
+        this.context.router.push('/')
+      })
+    }
   }
 
   login(){
@@ -17,13 +41,13 @@ export class Login extends React.Component {
         console.log('Error', err)
         return
       }
-      auth.setProfile(profile);
       auth.setToken(idToken);
-      this.context.router.replace('/')
+      auth.setProfile(profile);
+      this.context.router.push('/')
     });
   }
 
-  signin(){
+  loginRedirect(){
     this.lock.show();
   }
 
@@ -33,15 +57,11 @@ export class Login extends React.Component {
         <h2>Login</h2>
         <ButtonToolbar className={styles.toolbar}>
           <Button bsStyle="primary" onClick={this.login.bind(this)}>Login</Button>
-          <Button bsStyle="primary" onClick={this.signin.bind(this)}>Login with Redirect</Button>
+          <Button bsStyle="primary" onClick={this.loginRedirect.bind(this)}>Login with Redirect</Button>
         </ButtonToolbar>
       </div>
     )
   }
-}
-
-Login.contextTypes = {
-  router: T.object
 }
 
 export default Login;
