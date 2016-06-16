@@ -17,14 +17,15 @@ export class Login extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.lock = new Auth0Lock(__AUTH0_CLIENT_ID__, __AUTH0_DOMAIN__)
+    this.lock.on("authenticated", this.authenticate)
     this.parseAuthHash()
   }
 
   parseAuthHash() {
     var authHash = this.lock.parseHash(this.props.location.pathname)
-    if (authHash && authHash.id_token) {
-      auth.setToken(authHash.id_token)
-      this.lock.getProfile(authHash.id_token, (err, profile) => {
+    if (authHash && authHash.idToken) {
+      auth.setToken(authHash.idToken)
+      this.lock.getProfile(authHash.idToken, (err, profile) => {
         if (err) {
           console.log("Error loading the Profile", err)
         } else {
@@ -35,19 +36,14 @@ export class Login extends React.Component {
     }
   }
 
-  login(){
-    this.lock.show({popup:true}, (err, profile, idToken) => {
-      if (err){
-        console.log('Error', err)
-        return
-      }
-      auth.setToken(idToken);
-      auth.setProfile(profile);
-      this.context.router.push('/')
-    });
+  authenticate(authResult) {
+    console.log("authResult", authResult);
+    auth.setToken(authResult.idToken)
+    auth.setProfile(authResult.profile)
+    this.context.router.push('/')
   }
 
-  loginRedirect(){
+  login(){
     this.lock.show();
   }
 
@@ -57,7 +53,6 @@ export class Login extends React.Component {
         <h2>Login</h2>
         <ButtonToolbar className={styles.toolbar}>
           <Button bsStyle="primary" onClick={this.login.bind(this)}>Login</Button>
-          <Button bsStyle="primary" onClick={this.loginRedirect.bind(this)}>Login with Redirect</Button>
         </ButtonToolbar>
       </div>
     )

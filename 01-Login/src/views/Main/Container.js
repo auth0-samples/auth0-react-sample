@@ -3,9 +3,8 @@ import { Jumbotron } from 'react-bootstrap'
 import styles from './styles.module.css'
 
 export class Container extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    // __GAPI_KEY__
+  static contextTypes = {
+    router: T.object
   }
 
   render() {
@@ -25,10 +24,6 @@ export class Container extends React.Component {
       </Jumbotron>
     )
   }
-}
-
-Container.contextTypes = {
-  router: T.object
 }
 
 export default Container;
