@@ -1,6 +1,8 @@
+import {isTokenExpired} from './jwtHelper'
+
 const auth = {
   loggedIn(){
-    return !!localStorage.token
+    return !!localStorage.token && !isTokenExpired(localStorage.token)
   },
   setProfile(profile){
     localStorage.profile = JSON.stringify(profile)
