@@ -64,6 +64,7 @@
     "auth0-lock": "^9.2.1",
     "bootstrap": "^3.3.5",
     "classnames": "^2.2.5",
+    "jwt-decode": "^2.0.1",
     "react": "^15.0.2",
     "react-bootstrap": "^0.29.4",
     "react-dom": "^15.0.2",
