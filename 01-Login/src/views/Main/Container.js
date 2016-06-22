@@ -11,8 +11,7 @@ export class Container extends React.Component {
     let children = null;
     if (this.props.children) {
       children = React.cloneElement(this.props.children, {
-        router: this.context.router,
-        auth: this.props.route.auth
+        auth: this.props.route.auth //sends auth instance to children
       })
     }
 

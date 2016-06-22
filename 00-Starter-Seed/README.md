@@ -2,7 +2,7 @@
 
 This seed project contains a regular ReactJS application.
 
-The seed does not a contain anything related to Auth0 except the `auth0-lock` dependency in `package.json`. Instead, it will server as a starting point for adding Auth0 to your project.
+The seed does not a contain anything related to Auth0 except the `auth0-lock` dependency in `package.json`. Instead, it will serve as a starting point for adding Auth0 to your project.
 
 ## Getting Started
 
@@ -21,6 +21,7 @@ npm start
 
 ## Used Libraries
 
+* [auth0-lock](https://github.com/auth0/lock)
 * [webpack](https://webpack.github.io)
 * [postcss](http://postcss.org)
 * [hjs-webpack](https://github.com/HenrikJoreteg/hjs-webpack)

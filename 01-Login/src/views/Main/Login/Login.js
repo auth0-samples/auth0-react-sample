@@ -1,7 +1,7 @@
 import React, { PropTypes as T } from 'react'
 import {ButtonToolbar, Button} from 'react-bootstrap'
-import styles from './styles.module.css'
 import AuthService from 'utils/AuthService'
+import styles from './styles.module.css'
 
 export class Login extends React.Component {
   static contextTypes = {
@@ -10,16 +10,7 @@ export class Login extends React.Component {
 
   static propTypes = {
     location: T.object,
-    auth: T.instanceOf(AuthService),
-  }
-
-  constructor(props, context) {
-    super(props, context)
-    const { auth, location } = props;
-    console.log(auth, location);
-    if (auth.parseHash(location.pathname)){
-      // this.context.router.push('/')
-    }
+    auth: T.instanceOf(AuthService)
   }
 
   render() {

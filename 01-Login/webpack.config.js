@@ -87,31 +87,6 @@ config.module.loaders.push({
   loader: 'style-loader!css-loader'
 })
 
-// config.module.loaders.push({
-//   test: /\.css$/,
-//   include: [modules],
-//   loader: 'style!css'
-// })
-// CSS modules
-
-// Auth0 loaders
-config.module.loaders.push({
-  test: /auth0-lock[\\\/].*\.js$/,
-  include: [modules],
-  loaders: [
-    'transform-loader/cacheable?brfs',
-    'transform-loader/cacheable?packageify'
-  ]
-});
-
-config.module.loaders.push({
-  test: /auth0-lock[\\\/].*\.ejs$/,
-  include: [modules],
-  loader: 'transform-loader/cacheable?ejsify'
-})
-
-// END Auth0 loaders
-
 // postcss
 config.postcss = [].concat([
   require('precss')({}),
