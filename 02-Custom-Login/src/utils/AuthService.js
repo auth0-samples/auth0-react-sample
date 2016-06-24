@@ -1,41 +1,39 @@
 import { EventEmitter } from 'events'
 import { isTokenExpired } from './jwtHelper'
-import Auth0Lock from 'auth0-lock'
+import Auth0 from 'auth0-js'
 
 export default class AuthService extends EventEmitter {
   constructor(clientId, domain) {
     super()
     // Configure Auth0
-    this.lock = new Auth0Lock(clientId, domain, {})
-    // Add callback for lock `authenticated` event
-    this.lock.on('authenticated', this._doAuthentication.bind(this))
-    // Add callback for lock `authorization_error` event
-    this.lock.on('authorization_error', this._authorizationError.bind(this))
-    // binds login functions to keep this context
+    this.auth0 = new Auth0({
+      clientID: clientId,
+      domain: domain,
+      callbackOnLocationHash: true,
+      callbackURL: "http://localhost:3000/"
+    });
+
     this.login = this.login.bind(this)
   }
 
-  _doAuthentication(authResult){
-    // Saves the user token
-    this.setToken(authResult.idToken)
-    // Async loads the user profile data
-    this.lock.getProfile(authResult.idToken, (error, profile) => {
-      if (error) {
-        console.log('Error loading the Profile', error)
-      } else {
-        this.setProfile(profile)
-      }
-    })
+  login(params, onError){
+    this.auth0.login(params, onError)
   }
 
-  _authorizationError(error){
-    // Unexpected authentication error
-    console.log('Authentication Error', error)
-  }
-
-  login() {
-    // Call the show method to display the widget.
-    this.lock.show()
+  parseHash(hash){
+    const authResult = this.auth0.parseHash(hash);
+    if (authResult && authResult.idToken) {
+      this.setToken(authResult.idToken)
+      this.auth0.getProfile(authResult.idToken, (error, profile) => {
+        if (error) {
+          console.log('Error loading the Profile', error)
+        } else {
+          this.setProfile(profile)
+        }
+      })
+      return true
+    }
+    return false
   }
 
   loggedIn(){
