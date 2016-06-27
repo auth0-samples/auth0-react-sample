@@ -14,25 +14,24 @@ export class Login extends React.Component {
     auth: T.instanceOf(AuthService)
   }
 
-  handleSubmit(e){
-    e.preventDefault()
-    this.props.auth.login({
+  getAuthParams(){
+    return {
       connection: 'Username-Password-Authentication',
       responseType: 'token',
       email: ReactDOM.findDOMNode(this.refs.email).value,
       password: ReactDOM.findDOMNode(this.refs.password).value
-    }, function(err) {
+    }
+  }
+
+  handleSubmit(e){
+    e.preventDefault()
+    this.props.auth.login(this.getAuthParams(), function(err) {
       if (err) alert("something went wrong: " + err.message);
     });
   }
 
   signUp(){
-    this.props.auth.signup({
-      connection: 'Username-Password-Authentication',
-      responseType: 'token',
-      email: ReactDOM.findDOMNode(this.refs.email).value,
-      password: ReactDOM.findDOMNode(this.refs.password).value
-    }, function(err) {
+    this.props.auth.signup(this.getAuthParams(), function(err) {
       if (err) alert("something went wrong: " + err.message);
     });
   }
