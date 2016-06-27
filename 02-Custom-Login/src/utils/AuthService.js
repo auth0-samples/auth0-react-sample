@@ -9,19 +9,23 @@ export default class AuthService extends EventEmitter {
     this.auth0 = new Auth0({
       clientID: clientId,
       domain: domain,
-      callbackOnLocationHash: true,
-      callbackURL: "http://localhost:3000/"
+      callbackOnLocationHash: true
     });
 
     this.login = this.login.bind(this)
+    this.signup = this.signup.bind(this)
   }
 
   login(params, onError){
     this.auth0.login(params, onError)
   }
 
+  signup(params, onError){
+    this.auth0.signup(params, onError)
+  }
+
   parseHash(hash){
-    const authResult = this.auth0.parseHash(hash);
+    const authResult = this.auth0.parseHash(hash)
     if (authResult && authResult.idToken) {
       this.setToken(authResult.idToken)
       this.auth0.getProfile(authResult.idToken, (error, profile) => {
@@ -31,9 +35,7 @@ export default class AuthService extends EventEmitter {
           this.setProfile(profile)
         }
       })
-      return true
     }
-    return false
   }
 
   loggedIn(){

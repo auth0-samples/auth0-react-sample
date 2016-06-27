@@ -1,7 +1,6 @@
 .root{
-  text-align: center;
-}
-
-.toolbar{
-  display: inline-block;
+  width: 360px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px;
 }

@@ -1,7 +1,7 @@
-# Starter Seed for Auth0-React Quickstart Guides
+# Login Example for Auth0-React Quickstart Guides
 
 This project contains a regular ReactJS application where react-router is used to require authentication for urls with restricted access.
-The library `auth0-lock` provides the user authentication, and we also have `src/utils/AuthService.js` class to wrap lock usage and manage the localStorage items.
+The library `auth0-lock` provides the user authentication, and we also have `src/utils/AuthService.js` class to wrap Lock Widget usage and manage the localStorage items.
 
 ## Getting Started
 
@@ -11,7 +11,7 @@ Run:
 # Install the dependencies
 npm install
 
-# copy configuration (see below)
+# copy configuration and replace with your own
 cp .env.example .env
 
 # Run

@@ -15,11 +15,8 @@ const requireAuth = (nextState, replace) => {
 }
 
 const parseAuthHash = (nextState, replace) => {
-  if (auth.parseHash(nextState.location.hash)) {
-    replace({ pathname: '/' })
-  } else {
-    replace({ pathname: '/login' })
-  }
+  auth.parseHash(nextState.location.hash)
+  replace({ pathname: '/' })
 }
 
 export const makeMainRoutes = () => {
