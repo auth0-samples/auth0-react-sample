@@ -5,6 +5,7 @@ import Auth0Lock from 'auth0-lock'
 export default class AuthService extends EventEmitter {
   constructor(clientId, domain) {
     super()
+    this.domain = domain
     // Configure Auth0
     this.lock = new Auth0Lock(clientId, domain, {
       additionalSignUpFields: [{
@@ -34,7 +35,6 @@ export default class AuthService extends EventEmitter {
       } else {
         this.setProfile(profile)
       }
-      console.log(this)
     })
   }
 
@@ -65,6 +65,21 @@ export default class AuthService extends EventEmitter {
     // Retrieves the profile data from localStorage
     const profile = localStorage.getItem('profile')
     return profile ? JSON.parse(localStorage.profile) : {}
+  }
+
+  updateProfile(userId, data){
+    const headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.getToken()
+    }
+    return fetch(`https://${this.domain}/api/v2/users/${userId}`, {
+      method: 'PATCH',
+      headers: headers,
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(newProfile => this.setProfile(newProfile))
   }
 
   setToken(idToken){

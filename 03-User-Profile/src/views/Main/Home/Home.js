@@ -1,7 +1,8 @@
 import React, { PropTypes as T } from 'react'
 import {Button} from 'react-bootstrap'
 import AuthService from 'utils/AuthService'
-import Profile from 'components/Profile/Profile'
+import ProfileDetails from 'components/Profile/ProfileDetails'
+import ProfileEdit from 'components/Profile/ProfileEdit'
 import styles from './styles.module.css'
 
 export class Home extends React.Component {
@@ -16,7 +17,8 @@ export class Home extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
-      profile: props.auth.getProfile()
+      profile: props.auth.getProfile(),
+      editing: false
     }
     props.auth.on('profile_updated', (newProfile) => {
       this.setState({profile: newProfile})
@@ -33,7 +35,8 @@ export class Home extends React.Component {
     return (
       <div className={styles.root}>
         <h2>Home</h2>
-        <Profile profile={profile}></Profile>
+        <ProfileDetails profile={profile}></ProfileDetails>
+        <ProfileEdit profile={profile} auth={this.props.auth}></ProfileEdit>
         <Button onClick={this.logout.bind(this)}>Logout</Button>
       </div>
     )

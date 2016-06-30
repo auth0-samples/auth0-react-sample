@@ -2,9 +2,9 @@ import React, { PropTypes as T } from 'react'
 import {Row, Col, Image} from 'react-bootstrap'
 import s from './styles.module.css'
 
-export class Profile extends React.Component {
+export class ProfileDetails extends React.Component {
   static propTypes = {
-    data: T.object
+    profile: T.object
   }
 
   render(){
@@ -16,7 +16,7 @@ export class Profile extends React.Component {
           <Image src={profile.picture} circle className={s.avatar} />
         </Col>
         <Col md={6}>
-          <h3>Profile</h3>
+          <h3>Profile Details</h3>
           <p><strong>Name: </strong> {profile.name}</p>
           <p><strong>Email: </strong> {profile.email}</p>
           <p><strong>Nickname: </strong> {profile.nickname}</p>
@@ -29,4 +29,4 @@ export class Profile extends React.Component {
   }
 }
 
-export default Profile;
+export default ProfileDetails;
