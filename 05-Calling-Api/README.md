@@ -2,6 +2,7 @@
 
 This project contains a regular ReactJS application where react-router is used to require authentication for urls with restricted access.
 The library `auth0-lock` provides the user authentication, and we also have `src/utils/AuthService.js` class to wrap Lock Widget usage and manage the localStorage items.
+A basic node.js server is also provided as an example of `express-jwt` usage to parse JWT Tokens and protect private endpoints in `server.js`.
 
 ## Getting Started
 
@@ -14,7 +15,7 @@ npm install
 # copy configuration and replace with your own
 cp .env.example .env
 
-# Run
+# Run both webpack server and nodejs server
 npm start
 ```
 
@@ -29,3 +30,5 @@ npm start
 * [react-bootstrap](https://react-bootstrap.github.io/)
 * [enzyme](https://github.com/airbnb/enzyme)
 * [chai](http://chaijs.com)
+* [express](https://expressjs.com/)
+* [express-jwt](https://github.com/auth0/express-jwt)
