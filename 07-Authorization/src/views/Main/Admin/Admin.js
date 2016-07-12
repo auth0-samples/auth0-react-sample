@@ -22,7 +22,7 @@ export class Admin extends React.Component {
       <div className={styles.root}>
         <h2>Admin</h2>
         <p>You are viewing this because you are logged in and you have 'admin' role</p>
-        <Link to={'/home'}>Home</Link>
+        <Link to={'/home'}>Back to Home</Link>
       </div>
     )
   }

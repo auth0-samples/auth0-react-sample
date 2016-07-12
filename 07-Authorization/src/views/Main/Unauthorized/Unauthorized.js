@@ -21,7 +21,7 @@ export class Unauthorized extends React.Component {
     return (
       <div className={styles.root}>
         <h2>Unauthorized: you are not allowed to see this content</h2>
-        <Link to={'/home'}>Home</Link>
+        <Link to={'/home'}>Back to Home</Link>
       </div>
     )
   }

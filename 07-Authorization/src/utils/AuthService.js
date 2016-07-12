@@ -47,7 +47,7 @@ export default class AuthService extends EventEmitter {
   isAdmin(){
     // Checks if user have `admin` role
     const profile = this.getProfile();
-    const roles = profile.app_metadata.roles;
+    const { roles } = profile.app_metadata || {};
     return !!roles && roles.indexOf('admin') > -1;
   }
 

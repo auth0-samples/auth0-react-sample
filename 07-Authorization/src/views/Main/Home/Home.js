@@ -1,5 +1,5 @@
 import React, { PropTypes as T } from 'react'
-import {Button} from 'react-bootstrap'
+import {ButtonToolbar, Button} from 'react-bootstrap'
 import AuthService from 'utils/AuthService'
 import styles from './styles.module.css'
 import {Link} from 'react-router'
@@ -34,8 +34,10 @@ export class Home extends React.Component {
       <div className={styles.root}>
         <h2>Home</h2>
         <p>Welcome {profile.name}!</p>
-        <Link to={'/admin'}>Admin</Link>
-        <Button onClick={this.logout.bind(this)}>Logout</Button>
+        <ButtonToolbar className={styles.toolbar}>
+          <Link to={'/admin'}>Go to Admin</Link>
+          <Button onClick={this.logout.bind(this)}>Logout</Button>
+        </ButtonToolbar>
       </div>
     )
   }
