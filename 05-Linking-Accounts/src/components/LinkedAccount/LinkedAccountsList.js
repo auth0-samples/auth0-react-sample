@@ -15,7 +15,7 @@ export class LinkedAccountsList extends React.Component {
     const { profile, auth } = this.props
     const linker = new LinkAccountService(auth)
     let items = []
-    if (profile) {
+    if (profile && profile.identities) {
       items = profile.identities.map(identity => {
         return (<LinkedAccountItem {...this.props} identity={identity} />)
       })

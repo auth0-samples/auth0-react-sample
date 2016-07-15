@@ -106,9 +106,13 @@ export default class AuthService extends EventEmitter {
       method: 'POST',
       body: JSON.stringify(data)
     })
-    .then(identities => {
+    .then(response => {
       const profile = this.getProfile()
-      this.setProfile({...profile, identities}) // updates profile identities
+      if (response.error){
+        alert(response.message)
+      } else {
+        this.setProfile({...profile, identities: response}) // updates profile identities
+      }
     })
   }
 
@@ -117,9 +121,13 @@ export default class AuthService extends EventEmitter {
     this.fetchApi(`identities/${identity.provider}/${identity.user_id}`, {
       method: 'DELETE'
     })
-    .then(identities => {
+    .then(response => {
       const profile = this.getProfile()
-      this.setProfile({...profile, identities}) // updates profile identities
+      if (response.error){
+        alert(response.message)
+      } else {
+        this.setProfile({...profile, identities: response}) // updates profile identities
+      }
     })
   }
 }
