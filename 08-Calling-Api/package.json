@@ -5,7 +5,9 @@
   "repository": "https://github.com/auth0-samples/auth0-react-sample",
   "license": "MIT",
   "scripts": {
-    "start": "cross-env NODE_ENV=development hjs-dev-server & node server.js",
+    "start": "npm-run-all --parallel dev-server server-api",
+    "dev-server": "NODE_ENV=development cross-env hjs-dev-server",
+    "server-api": "node server.js",
     "clean": "rimraf dist",
     "build": "npm run clean && cross-env NODE_ENV=production webpack",
     "publish_pages": "gh-pages -d dist",
@@ -47,6 +49,7 @@
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "^1.7.0",
     "mocha": "^2.4.5",
+    "npm-run-all": "^2.3.0",
     "phantomjs-polyfill": "0.0.2",
     "phantomjs-prebuilt": "^2.1.7",
     "postcss-loader": "^0.9.1",

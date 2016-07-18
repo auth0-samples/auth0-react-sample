@@ -3,6 +3,10 @@ var app = express();
 var jwt = require('express-jwt');
 require('dotenv').config();
 
+if (!process.env.AUTH0_CLIENT_ID || !process.env.AUTH0_SECRET){
+  throw 'Make sure you have AUTH0_CLIENT_ID and AUTH0_SECRET in your .env file'
+}
+
 var authenticate = jwt({
   secret: new Buffer(process.env.AUTH0_SECRET, 'base64'),
   audience: process.env.AUTH0_CLIENT_ID

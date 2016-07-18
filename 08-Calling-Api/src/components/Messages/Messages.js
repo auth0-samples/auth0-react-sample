@@ -14,10 +14,9 @@ export class Messages extends React.Component {
       publicMsg: "",
       privateMsg: ""
     }
-    this.callApis()
   }
 
-  callApis(){
+  componentDidMount(){
     const { auth } = this.props
     // public http request
     fetch('/api/public')
