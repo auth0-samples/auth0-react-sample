@@ -27,7 +27,7 @@ Shut it down manually with Ctrl-C.
 
 ## Important Snippets
 
-### 1. AuthService handling lock login
+### 1. AuthService handling lock login and localStorage
 
 ```javascript
 /* ===== ./src/utils/AuthService.js ===== */
