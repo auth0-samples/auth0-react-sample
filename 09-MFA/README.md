@@ -1,8 +1,8 @@
 # MFA
 
-[Full Tutorial](https://auth0.com/docs/quickstart/spa/react/03-session-handling)
+[Full Tutorial](https://auth0.com/docs/quickstart/spa/react/09-mfa)
 
-This example shows how to add **Multifactor Authentication** to your Auth0 authentication flow in a ReactJS project. To enable MFA in your Auth0 account, go to the [Multifactor Authentication section](https://manage.auth0.com/#/guardian) of the management area and enable either Push Notifications or SMS. There is no need for extra code configuration.
+This example shows how to add ***Multifactor Authentication*** to your Auth0 authentication flow in a ReactJS project. To enable MFA in your Auth0 account, go to the [Multifactor Authentication section](https://manage.auth0.com/#/guardian) of the management area and enable either Push Notifications or SMS. There is no need for extra code configuration.
 
 ## Getting Started
 
