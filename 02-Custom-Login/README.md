@@ -35,7 +35,6 @@ import Auth0 from 'auth0-js'
 
 export default class AuthService {
   constructor(clientId, domain) {
-    super()
     // Configure Auth0
     this.auth0 = new Auth0({
       clientID: clientId,
