@@ -15,8 +15,10 @@ const requireAuth = (nextState, replace) => {
 }
 
 const parseAuthHash = (nextState, replace) => {
-  auth.parseHash(nextState.location.hash)
-  replace({ pathname: '/' })
+  if (nextState.location.hash) {
+    const results = auth.parseHash(nextState.location.hash)
+    replace({ pathname: '/' })
+  }
 }
 
 export const makeMainRoutes = () => {
@@ -24,8 +26,7 @@ export const makeMainRoutes = () => {
     <Route path="/" component={Container} auth={auth}>
       <IndexRedirect to="/home" />
       <Route path="home" component={Home} onEnter={requireAuth} />
-      <Route path="login" component={Login} />
-      <Route path="access_token=:token" onEnter={parseAuthHash} /> //to prevent router errors
+      <Route path="login" component={Login} onEnter={parseAuthHash} />
     </Route>
   )
 }

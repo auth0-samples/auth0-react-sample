@@ -16,6 +16,10 @@ export default class AuthService extends EventEmitter {
       },
       languageDictionary: {
         title: "My Company"
+      },
+      auth: {
+        redirectUrl: `${window.location.origin}/login`,
+        responseType: 'token'
       }
     })
     // Add callback for lock `authenticated` event
@@ -30,7 +34,7 @@ export default class AuthService extends EventEmitter {
     // Saves the user token
     this.setToken(authResult.idToken)
     // navigate to the home route
-    browserHistory.replace('/#/home')
+    browserHistory.replace('/home')
     // Async loads the user profile data
     this.lock.getProfile(authResult.idToken, (error, profile) => {
       if (error) {
