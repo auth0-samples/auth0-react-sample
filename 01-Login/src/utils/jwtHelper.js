@@ -13,9 +13,8 @@ export function getTokenExpirationDate(token){
 
 export function isTokenExpired(token){
   const date = getTokenExpirationDate(token)
-  const offsetSeconds = 0
   if (date === null) {
     return false
   }
-  return !(date.valueOf() > (new Date().valueOf() + (offsetSeconds * 1000)))
+  return !(date.valueOf() > new Date().valueOf())
 }
