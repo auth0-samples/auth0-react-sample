@@ -9,6 +9,10 @@ export default class AuthService extends EventEmitter {
     this.domain = domain
     // Configure Auth0
     this.lock = new Auth0Lock(clientId, domain, {
+      auth: {
+        redirectUrl: `${window.location.origin}/login`,
+        responseType: 'token'
+      },
       additionalSignUpFields: [{
         name: "address",                              // required
         placeholder: "enter your address",            // required
@@ -30,7 +34,7 @@ export default class AuthService extends EventEmitter {
     // Saves the user token
     this.setToken(authResult.idToken)
     // navigate to the home route
-    browserHistory.replace('/#/home')
+    browserHistory.replace('/home')
     // Async loads the user profile data
     this.lock.getProfile(authResult.idToken, (error, profile) => {
       if (error) {

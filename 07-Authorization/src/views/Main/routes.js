@@ -44,7 +44,6 @@ export const makeMainRoutes = () => {
         <Route path="unauthorized" component={Unauthorized} />
       </Route>
       <Route path="login" component={Login} />
-      <Route path="access_token=:token" component={Login} /> //to prevent router errors
     </Route>
   )
 }

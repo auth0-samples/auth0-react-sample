@@ -9,7 +9,8 @@ export default class AuthService extends EventEmitter {
     this.auth0 = new Auth0({
       clientID: clientId,
       domain: domain,
-      callbackOnLocationHash: true
+      responseType: 'token',
+      callbackURL: `${window.location.origin}/login`
     });
 
     this.login = this.login.bind(this)
