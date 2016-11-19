@@ -1,15 +1,26 @@
-var express = require('express');
-var app = express();
-var jwt = require('express-jwt');
+const express = require('express');
+const app = express();
+const jwt = require('express-jwt');
+const jwksRsa = require('jwks-rsa');
 require('dotenv').config();
 
-if (!process.env.AUTH0_CLIENT_ID || !process.env.AUTH0_SECRET){
-  throw 'Make sure you have AUTH0_CLIENT_ID and AUTH0_SECRET in your .env file'
+if (!process.env.AUTH0_DOMAIN || !process.env.AUTH0_AUDIENCE) {
+  throw 'Make sure you have AUTH0_DOMAIN, and AUTH0_AUDIENCE in your .env file'
 }
 
-var authenticate = jwt({
-  secret: process.env.AUTH0_SECRET,
-  aud: process.env.AUTH0_CLIENT_ID
+const authenticate = jwt({
+  // Dynamically provide a signing key based on the kid in the header and the singing keys provided by the JWKS endpoint.
+  secret: jwksRsa.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
+  }),
+
+  // Validate the audience and the issuer.
+  audience: process.env.AUTH0_AUDIENCE,
+  issuer: `https://${process.env.AUTH0_DOMAIN}/`,
+  algorithms: ['RS256']
 });
 
 app.get('/api/public', function(req, res) {

@@ -19,7 +19,7 @@ export default class AuthService extends EventEmitter {
     this.auth0.login({
       responseType: 'id_token token',
       scope: 'openid profile {API SCOPES}',
-      audience: '{API IDENTIFIER}' // obtained from APIs section in dashboard. See the quickstart link in the readme for more.
+      audience: __AUTH0_AUDIENCE__ // obtained from APIs section in dashboard. See the quickstart link in the readme for more.
     })
   }
 
