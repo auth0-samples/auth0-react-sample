@@ -8,7 +8,7 @@ This example shows how to implement ***Login*** and ***SignUp*** features to you
 
 The library `auth0-lock` provides the user authentication, and we also have `src/utils/AuthService.js` class to wrap Lock Widget usage and manage the localStorage items.
 
-In order to get start, run the three commands below. Make sure your `.env` file has the correct values from your auth0 account.
+In order to get started, run the three commands below. Make sure your `.env` file has the correct values from your auth0 account.
 
 ```bash
 # Install the dependencies
