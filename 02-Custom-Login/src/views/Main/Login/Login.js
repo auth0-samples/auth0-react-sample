@@ -14,43 +14,35 @@ export class Login extends React.Component {
     auth: T.instanceOf(AuthService)
   }
 
-  getAuthParams(){
+  getAuthParams() {
     return {
-      connection: 'Username-Password-Authentication',
-      responseType: 'token',
       email: ReactDOM.findDOMNode(this.refs.email).value,
       password: ReactDOM.findDOMNode(this.refs.password).value
     }
   }
 
-  handleSubmit(e){
+  login(e) {
     e.preventDefault()
-    this.props.auth.login(this.getAuthParams(), function(err) {
-      if (err) alert("something went wrong: " + err.message);
-    });
+    const { email, password } = this.getAuthParams()
+    this.props.auth.login(email, password)
   }
 
-  signUp(){
-    this.props.auth.signup(this.getAuthParams(), function(err) {
-      if (err) alert("something went wrong: " + err.message);
-    });
+  signup() {
+    const { email, password } = this.getAuthParams()
+    this.props.auth.signup(email, password)
   }
 
-  googleLogin(){
-    this.props.auth.login({
-      connection: 'google-oauth2'
-    }, function(err) {
-      if (err) alert("something went wrong: " + err.message);
-    });
+  loginWithGoogle() {
+    this.props.auth.loginWithGoogle();
   }
 
   render() {
     return (
       <div className={styles.root}>
         <h2>Login</h2>
-        <Form onSubmit={this.handleSubmit.bind(this)}>
+        <Form onSubmit={this.login.bind(this)}>
           <FormGroup controlId="email">
-            <ControlLabel>E-mail</ControlLabel>
+            <ControlLabel>Email</ControlLabel>
             <FormControl type="email" ref="email" placeholder="yours@example.com" required />
           </FormGroup>
 
@@ -60,9 +52,9 @@ export class Login extends React.Component {
           </FormGroup>
 
           <ButtonToolbar>
-            <Button type="submit" bsStyle="primary">Sign In</Button>
-            <Button onClick={this.signUp.bind(this)}>Sign Up</Button>
-            <Button bsStyle="link" onClick={this.googleLogin.bind(this)}>Login with Google</Button>
+            <Button type="submit" bsStyle="primary">Log In</Button>
+            <Button onClick={this.signup.bind(this)}>Sign Up</Button>
+            <Button bsStyle="link" onClick={this.loginWithGoogle.bind(this)}>Login with Google</Button>
           </ButtonToolbar>
         </Form>
       </div>

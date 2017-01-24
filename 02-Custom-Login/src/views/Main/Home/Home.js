@@ -22,12 +22,12 @@ export class Home extends React.Component {
     })
   }
 
-  logout(){
+  logout() {
     this.props.auth.logout()
     this.context.router.push('/login');
   }
 
-  render(){
+  render() {
     const { profile } = this.state
     return (
       <div className={styles.root}>

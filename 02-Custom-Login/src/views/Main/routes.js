@@ -15,9 +15,8 @@ const requireAuth = (nextState, replace) => {
 }
 
 const parseAuthHash = (nextState, replace) => {
-  if (nextState.location.hash) {
-    const results = auth.parseHash(nextState.location.hash)
-    replace({ pathname: '/' })
+  if (/access_token|id_token|error/.test(nextState.location.hash)) {
+    auth.parseHash(nextState.location.hash)
   }
 }
 
