@@ -64,7 +64,7 @@
     "yargs": "^4.7.1"
   },
   "dependencies": {
-    "auth0-lock": "^10.2.2",
+    "auth0-lock": "^10.11.0",
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
     "express-jwt": "^5.0.0",
