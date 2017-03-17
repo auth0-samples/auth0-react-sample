@@ -55,7 +55,7 @@ export default class AuthService extends EventEmitter {
   }
 
   parseHash(hash) {
-    this.auth0.parseHash({ hash }, (err, authResult) => {
+    this.auth0.parseHash({ hash, _idTokenVerification: false }, (err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setToken(authResult.accessToken, authResult.idToken)
         browserHistory.replace('/home')
