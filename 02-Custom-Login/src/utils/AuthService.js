@@ -20,19 +20,12 @@ export default class AuthService extends EventEmitter {
   }
 
   login(username, password) {
-    this.auth0.client.login({
-      realm: 'Username-Password-Authentication',
+    this.auth0.redirect.loginWithCredentials({
+      connection: 'Username-Password-Authentication',
       username,
       password
-    }, (err, authResult) => {
-      if (err) {
-        alert('Error: ' + err.description)
-        return
-      }
-      if (authResult && authResult.idToken && authResult.accessToken) {
-        this.setToken(authResult.accessToken, authResult.idToken)
-        browserHistory.replace('/home')
-      }
+    }, err => {
+      if (err) return alert(err.description)
     })
   }
 
@@ -41,10 +34,8 @@ export default class AuthService extends EventEmitter {
       connection: 'Username-Password-Authentication',
       email,
       password,
-    }, function(err) {
-      if (err) {
-        alert('Error: ' + err.description)
-      }
+    }, err => {
+      if (err) return alert(err.description)
     })
   }
 
@@ -58,12 +49,12 @@ export default class AuthService extends EventEmitter {
     this.auth0.parseHash({ hash, _idTokenVerification: false }, (err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setToken(authResult.accessToken, authResult.idToken)
-        browserHistory.replace('/home')
         this.auth0.client.userInfo(authResult.accessToken, (error, profile) => {
           if (error) {
             console.log('Error loading the Profile', error)
           } else {
             this.setProfile(profile)
+            browserHistory.replace('/home')
           }
         })
       } else if (authResult && authResult.error) {
